@@ -4,6 +4,7 @@
 #define Y_MAX 239
 
 void MenuStartUp();
+void DisplayCredits();
 
 int main() {
     int x, y;
@@ -33,4 +34,11 @@ void MenuStartUp() {
     //view credits option
     LCD.DrawRectangle(100,170, 150,40);
     LCD.WriteAt("View Credits", 110, 175);
+}
+
+void DisplayCredits() {
+    LCD.Clear();
+
+    LCD.WriteLine("In collaboration with OSU's FEH Department\n");
+    LCD.WriteLine("\nDevelopers: Nelly Azar, Kalpak Duddella, Phillip Becker");
 }
