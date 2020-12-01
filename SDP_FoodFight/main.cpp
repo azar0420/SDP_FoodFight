@@ -3,17 +3,28 @@
 #define X_MAX 319
 #define Y_MAX 239
 
+using namespace std;
+
 void MenuStartUp();
-void DisplayStats(); //this function will be rewritten such that it's suitable for a class variable
 void DisplayCredits();
 void DisplayInstructions();
 void PlayGame();
 
+class Stats {
+    private:
+        int battle, death;
+    public:
+        Stats();
+        void DisplayStats();
+};
+
 int main() {
     int x, y;
+    Stats s;
     LCD.Clear();
 
-    PlayGame();
+    s.DisplayStats(); //TEST
+
     while (!LCD.Touch(&x, &y)) {
         // Run forever
     }
@@ -44,19 +55,7 @@ void MenuStartUp() {
 void PlayGame() {
     LCD.Clear();
 
-    LCD.WriteAt("I lost the game", 150, 150);
-}
-
-//this function displays the stats of the player
-void DisplayStats() {
-    //clears the screen
-    LCD.Clear();
-
-    LCD.WriteAt("Stats TBD", (X_MAX/2),(Y_MAX/2));
-
-    //drawing a back button for the player to go back to the menu
-    LCD.DrawRectangle(0,(Y_MAX-20),50,20);
-    LCD.WriteAt("BACK",5,(Y_MAX-15));
+    LCD.WriteAt("Play game here", 150, 150);
 }
 
 void DisplayInstructions() {
@@ -88,4 +87,23 @@ void DisplayCredits() {
     //drawing a back button for the player to go back to the menu
     LCD.DrawRectangle(0,(Y_MAX-20),50,20);
     LCD.WriteAt("BACK",5,(Y_MAX-15));
+}
+
+//constructor sets values to 0 by default
+Stats::Stats() {
+    death = 0;
+    battle = 0;
+}
+
+void Stats:: DisplayStats() {
+    //clearing screen
+    LCD.Clear();
+
+    //displaying death
+    LCD.Write("Deaths: ");
+    LCD.Write(death);
+
+    //displaying battles
+    LCD.Write(", Battles: ");
+    LCD.Write(battle);
 }
