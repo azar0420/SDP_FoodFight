@@ -5,17 +5,15 @@
 
 void MenuStartUp();
 void DisplayStats(); //this function will be rewritten such that it's suitable for a class variable
-void PlayGame(); //to be rewritten into class after menu check
 void DisplayCredits();
 void DisplayInstructions();
+void PlayGame();
 
 int main() {
     int x, y;
     LCD.Clear();
-    //LCD.WriteLine("Hello World!");
-    //MenuStartUp();
-    LCD.DrawRectangle(0,(Y_MAX-20),50,20);
-    LCD.WriteAt("BACK",5,(Y_MAX-15));
+
+    PlayGame();
     while (!LCD.Touch(&x, &y)) {
         // Run forever
     }
@@ -44,10 +42,9 @@ void MenuStartUp() {
 }
 
 void PlayGame() {
-    //clears the screen
     LCD.Clear();
 
-    LCD.WriteLine("\nI lost the game...");
+    LCD.WriteAt("I lost the game", 150, 150);
 }
 
 //this function displays the stats of the player
@@ -55,9 +52,7 @@ void DisplayStats() {
     //clears the screen
     LCD.Clear();
 
-    LCD.WriteLine("\nMean, median, and mode are pretty funky huh?");
-    LCD.WriteLine("\nShoutouts to you AP Stats");
-    LCD.WriteLine("\nActual stats TBD hahaha");
+    LCD.WriteAt("Stats TBD", (X_MAX/2),(Y_MAX/2));
 
     //drawing a back button for the player to go back to the menu
     LCD.DrawRectangle(0,(Y_MAX-20),50,20);
@@ -65,17 +60,13 @@ void DisplayStats() {
 }
 
 void DisplayInstructions() {
-
     //clearing the screen
     LCD.Clear();
 
-    LCD.WriteLine("\nChicken, burgers, mexican grill, asian takeout\n");
-    LCD.WriteLine("\nLong ago, the four restaurants lived in harmony\n");
-    LCD.WriteLine("\nThen everything changed when the ??? nation attacked\n"); //ill figure it out later
-    LCD.WriteLine("\nOnly the Pepsiman, master of all restaurants, could stop them\n");
-    LCD.WriteLine("\nA hundred years passed and a new pepsiman has been discovered\n");
-    LCD.WriteLine("\nAnd although his Pepsi skills are great, he still has a lot to learn\n");
-    LCD.WriteLine("But I believe Pepsiman can save the restaurant world");
+    LCD.WriteAt("1: Use keys to move around", 0,0);
+    LCD.WriteAt("2: Battle bosses to advance levels", 0 ,30);
+    LCD.WriteAt("3: Don't let your HP go to zero!", 0, 60);
+    LCD.WriteAt("4: HAVE FUN!", 0,90);
 
     //drawing a back button for the player to go back to the menu
     LCD.DrawRectangle(0,(Y_MAX-20),50,20);
@@ -89,8 +80,10 @@ void DisplayCredits() {
     LCD.Clear();
 
     //writing the credits to the screen
-    LCD.WriteLine("In collaboration with OSU's FEH Department\n");
-    LCD.WriteLine("\nDevelopers: Nelly Azar, Kalpak Duddella, Phillip Becker");
+    LCD.WriteLine("Thanks to OSU's FEH Department");
+    LCD.WriteAt("Developer: Nelly Azar", 0,50);
+    LCD.WriteAt("Developer: Kalpak Duddella", 0,70);
+    LCD.WriteAt("Developer: Phillip Becker", 0,90);
 
     //drawing a back button for the player to go back to the menu
     LCD.DrawRectangle(0,(Y_MAX-20),50,20);
