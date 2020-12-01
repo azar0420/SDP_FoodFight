@@ -41,4 +41,8 @@ void DisplayCredits() {
 
     LCD.WriteLine("In collaboration with OSU's FEH Department\n");
     LCD.WriteLine("\nDevelopers: Nelly Azar, Kalpak Duddella, Phillip Becker");
+    
+    //drawing a back button for the player to go back to the menu
+    LCD.DrawRectangle(0,(Y_MAX-20),50,20);
+    LCD.WriteAt("BACK",5,(Y_MAX-15));
 }
