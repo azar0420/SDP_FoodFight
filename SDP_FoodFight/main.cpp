@@ -190,6 +190,22 @@ void DrawLevel(int level) {
             break;
         case 2:
             //Mexican grill level
+
+            //drawing wall
+            LCD.SetDrawColor(LCD.Red);
+            LCD.FillRectangle(0,0,X_MAX,50); //will be replaced with drawings of cacti and chipotle peppers
+
+            //drawing entrance
+            LCD.SetDrawColor(LCD.White);
+            for (int y = 70; y <= 103; y++) {
+                LCD.DrawLine(297,y,X_MAX, (y-14));
+            }
+            //drawing exit
+            LCD.SetDrawColor(LCD.White);
+            for (int y = (Y_MAX - 34); y < Y_MAX; y++) {
+                LCD.DrawLine(0,(y-14), (X_MAX - 297), y);
+            }
+            
             break;
         case 1: 
             //american traiditional level
