@@ -277,55 +277,76 @@ void DrawLevel(int level) {
         case 4:
             //pepsiman level
 
+            //drawing wall outlines
             LCD.SetDrawColor(LCD.Blue);
             LCD.DrawLine(120,0,15,Y_MAX);
             LCD.DrawLine(X_MAX,0,297,50);
             LCD.DrawLine(100,50,297,50);
             LCD.DrawLine(297,50,297,Y_MAX);
 
+            //drawing logo onto first wall
+            LCD.SetDrawColor(LCD.Red);
+            LCD.DrawLine(34,74,28,98);
+            LCD.DrawLine(34,74,50,0);
+            LCD.DrawLine(28,98,0,150);
+            LCD.FillRectangle(0,0,28,98);
+
             //drawing entrance
             LCD.SetDrawColor(LCD.White);
             for (int y = 130; y <= 163; y++) {
-                LCD.DrawLine(297,y,X_MAX,(y-14));
+                LCD.DrawLine(309,y,X_MAX,(y-14));
             }
 
 
             break;
         case 3:
-            //Coffee level
+            //pizza level
 
-            //drawing wall
+            //drawing italian flag
             LCD.SetDrawColor(LCD.Green);
-            LCD.FillRectangle(0,0,29,35);
-            LCD.FillRectangle(131,0,(X_MAX-131),35);
+            LCD.FillRectangle(200,0,10,30);
+            LCD.SetDrawColor(LCD.White);
+            LCD.FillRectangle(211,0,10,30);
+            LCD.SetDrawColor(LCD.Red);
+            LCD.FillRectangle(222,0,10,30);
 
             //drawing table
             LCD.SetDrawColor(LCD.Gray);
             LCD.FillRectangle(0,50,X_MAX,30);
 
+            LCD.SetDrawColor(LCD.Blue);
+            LCD.FillRectangle(30,0,100,34); //drawing menu
+
             //drawing everything that's white
             LCD.SetDrawColor(LCD.White);
-            LCD.FillRectangle(30,0,100,34); //drawing menu
 
             LCD.FillRectangle(0,35,X_MAX,20); //countertop
 
             //drawing the exit
             for (int y = 202; y <= 235; y++) {
-                LCD.DrawLine(314,y,X_MAX,(y-14));
+                LCD.DrawLine(309,y,X_MAX,(y-14));
             }
 
             //drawing the entrance
             for (int y = 108; y <= 141; y++) {
-                LCD.DrawLine(0,(y-14),(X_MAX - 314), y);
+                LCD.DrawLine(0,(y-14),(X_MAX - 309), y);
             }
 
             LCD.SetDrawColor(LCD.Black);
             LCD.DrawLine(0,54,X_MAX,54); //outline
             LCD.DrawLine(0,35,X_MAX,35); //outline
 
-            //drawing menu;
+            //drawing pizza box
+            LCD.DrawRectangle(180, 45, 50,10);
+            LCD.DrawHorizontalLine(39,170,220);
+            LCD.DrawLine(180,45,170,39);
+            LCD.DrawLine(230,45,220,39);
+            LCD.DrawVerticalLine(170,39,50);
+            LCD.DrawLine(170,50,180,55);
 
-
+            LCD.SetFontColor(LCD.White);
+            LCD.WriteAt("CHEESE", 32, 5);
+            LCD.WriteAt("PEPPERONI", 32, 20);
 
             break;
         case 2:
@@ -333,76 +354,112 @@ void DrawLevel(int level) {
 
             //drawing wall
             LCD.SetDrawColor(LCD.Red);
-            LCD.FillRectangle(0,0,X_MAX,39); //will be replaced with drawings of cacti and chipotle peppers
+            LCD.FillRectangle(25,0,100,39);
+            LCD.FillRectangle(150,0,100,39);
 
-            //drawing counter
-            LCD.SetDrawColor(LCD.Gray);
-            LCD.FillRectangle(0,50,X_MAX,30);
-            LCD.SetDrawColor(LCD.White);
-            LCD.FillRectangle(0,35,X_MAX,20); //countertop where food is ordered from
-            LCD.SetDrawColor(LCD.Black);
-            LCD.DrawLine(0,54,X_MAX,54); //outline
-            LCD.DrawLine(0,35,X_MAX,35); //outline
+            LCD.SetDrawColor(LCD.Green);
+            LCD.FillCircle(260,20,6);
+            LCD.FillRectangle(260,10,20,25);
+            LCD.FillCircle(280,22,8);
+            LCD.FillCircle(270,10,10);
 
             //drawing entrance
             LCD.SetDrawColor(LCD.White);
             for (int y = 90; y <= 123; y++) {
-                LCD.DrawLine(314,y,X_MAX, (y-14));
+                LCD.DrawLine(309,y,X_MAX, (y-14));
             }
             //drawing exit
             LCD.SetDrawColor(LCD.White);
             for (int y = (Y_MAX - 34); y < Y_MAX; y++) {
-                LCD.DrawLine(0,(y-14), (X_MAX - 314), y);
+                LCD.DrawLine(0,(y-14), (X_MAX - 309), y);
             }
 
+            LCD.FillRectangle(0,35,X_MAX,20); //countertop where food is ordered from
+
+            for (int i = 5; i < (X_MAX - 21); i += 50) {
+                LCD.SetDrawColor(LCD.Black);
+                LCD.DrawRectangle(i,38,20,10);
+                if (i == 5) {
+                    LCD.SetDrawColor(LCD.Green);
+                }
+                else if (i==55) {
+                    LCD.SetDrawColor(LCD.Scarlet);
+                }
+                else if (i==105) {
+                    LCD.SetDrawColor(LCD.White);
+                }
+                else if (i==155) {
+                    LCD.SetDrawColor(LCD.Red);
+                }
+
+                LCD.FillRectangle((i+1), 39,19,9);
+            }
+
+            //drawing counter
+            LCD.SetDrawColor(LCD.Gray);
+            LCD.FillRectangle(0,50,X_MAX,30);
+            LCD.SetDrawColor(LCD.Black);
+            LCD.DrawLine(0,50,X_MAX,50); //outline
+            LCD.DrawLine(0,35,X_MAX,35); //outline
+
+            //Writing menu
+            LCD.SetFontColor(LCD.Black);
+            LCD.WriteAt("BURRITO", 30,2);
+            LCD.WriteAt("TACO", 30,20);
+            LCD.WriteAt("GUAC", 155, 2);
+            LCD.WriteAt("SALSA", 155, 20);
             break;
         case 1:
             //american traiditional level
-            LCD.SetDrawColor(LCD.Red);
-            LCD.FillRectangle(0,0,134,50);
-            LCD.FillRectangle(184,0,(X_MAX-184),50);
-
-            int y = 24;
-            //drawing the wall
-            for(int x = 134; x < 185; x++) {
-                LCD.DrawLine(x,0,x,y);
-                if (x <= 184 && x >= 162) {
-                    y++;
-                }
-                else if (x >= 134 && x < 159) {
-                    y--;
-                }   
-            }
-
-            y = 24;
-            for (int x = 184; x > 133; x--) {
-                LCD.DrawLine(x,(50-y),x,49);
-
-                if (x <= 184 && x > 161) {
-                    y--;
-                } 
-                else if (x <= 159 && x >= 134) {
-                    y++;
-                }
-            }
+            LCD.SetDrawColor(LCD.Scarlet);
+            LCD.FillRectangle(0,0,X_MAX,50);
 
             LCD.SetDrawColor(LCD.White);
             LCD.FillCircle(159,10,25);
+            LCD.FillRectangle(20,0,70,40);
 
             //drawing the exit
             for (int y = 202; y <= 235; y++) {
-                LCD.DrawLine(314,y,X_MAX,(y-14));
+                LCD.DrawLine(309,y,X_MAX,(y-14));
             }
 
             //drawing the entrance
             for (int y = 75; y <= 108; y++) {
-                LCD.DrawLine(0,(y-14),(X_MAX - 314), y);
+                LCD.DrawLine(0,(y-14),(X_MAX - 309), y);
             }
+
+            //drawing logo
+            LCD.SetDrawColor(LCD.Blue);
+            LCD.DrawVerticalLine(140,35,20); //end
+            LCD.DrawLine(140,20,141,17); //m = 3
+            LCD.DrawLine(141,17,143,14); //m = 3/2
+            LCD.DrawLine(143,14,145,12); //m = 1
+            LCD.DrawLine(145,12,149,10); //m = 1/2
+            LCD.DrawHorizontalLine(10,149,151); //peak
+            LCD.DrawLine(151,10,155,12); //m = 1/2
+            LCD.DrawLine(155,12,157,14); //m = 1
+            LCD.DrawLine(157,14,159,17); //m = 3/2
+            LCD.DrawLine(159,17,160,20); //m = 3
+            LCD.DrawVerticalLine(160,35,20); //midpoint
+            LCD.DrawLine(160,20,161,17); //m = 3
+            LCD.DrawLine(161,17,163,14); //m = 3/2
+            LCD.DrawLine(163,14,165,12); //m = 1
+            LCD.DrawLine(165,12,169,10); //m = 1/2
+            LCD.DrawHorizontalLine(10,169,171); //peak
+            LCD.DrawLine(171,10,175,12); //m = 1/2
+            LCD.DrawLine(175,12,177,14); //m = 1
+            LCD.DrawLine(177,14,179,17); //m = 3/2
+            LCD.DrawLine(179,17,180,20); //m = 3
+            LCD.DrawVerticalLine(180,35,20); //end
+
+            //writing in menu
+            LCD.SetFontColor(LCD.Black);
+            LCD.WriteAt("~~~~ $1", 25,5);
+            LCD.WriteAt("~~~~ $1", 25,25);
 
             break;
     }
 }
-
 void DrawCharacter(char characterselect, int x, int y) {
     if (characterselect == 'M') {
         LCD.SetDrawColor(LCD.Blue);
