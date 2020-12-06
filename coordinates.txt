@@ -1,0 +1,28 @@
+*since the entrances and exits are drawn as parallelograms, the y coordinates are the top and bottom-most pixels
+
+Level 1:
+	Exit:
+		y-coordinates: 188-235
+		x-coordinates: 309-319
+	Entrance:
+		y-coordinates: 61-108
+		x-coordinates: 0-10
+
+Level 2:
+	Exit:
+		y-coordinates: 191-239
+		x-coordinates: 0-10
+	Entrance:
+		y-coordinates: 76-123
+		x-coordinates: 309-319
+Level 3:
+	Exit:
+		y-coordiantes: 188-235
+		x-coordinates: 309-319
+	Entrance: 
+		y-coordinates: 94-141
+		x-coordinates: 0-10
+Level 4:
+	Entrance: 
+		y-coordinates: 116-163
+		x-coordinates: 309-319
