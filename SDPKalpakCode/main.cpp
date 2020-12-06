@@ -1,7 +1,7 @@
 #include "FEHLCD.h"
 
 #include "FEHRandom.h"
-#include <stdlib.h>
+
 
 /**
  * Entry point to the application.
@@ -92,10 +92,10 @@ void HealthBar::HealthPotion(int inc){
 
 void DrawBoss(char charactername, int x, int y){
      if (characterselect == 'M') {
-        LCD.SetDrawColor(LCD.Black);
+        LCD.SetDrawColor(LCD.Blue);
         LCD.DrawRectangle(x,y,11,11);
 
-        LCD.SetDrawColor(LCD.Green);
+        LCD.SetDrawColor(LCD.Red);
 
         for (int i = x+1; i < x+10; i++){
             if (i == (x+1)|| i == (x+9)) {
@@ -118,144 +118,1019 @@ void DrawBoss(char charactername, int x, int y){
 
 
     }
-    else if (charactername == 'P') {
-        //Pizza character
-        LCD.SetDrawColor(LCD.Black);
-        LCD.FillRectangle(x,y,11,11);
+    else if (charactername == 'Pe') {
+        //Pepsi character
+        LCD.SetDrawColor(LCD.White);
+        LCD.FillRectangle(x,y,10,10);
 
-        LCD.SetDrawColor(LCD.Green);
-        LCD.DrawPixel((x+1), (y+5));
-        LCD.DrawPixel((x+9), y+2);
-        LCD.DrawPixel((x+5), (y+5));
-        LCD.DrawPixel((x+8), y+7);
+        LCD.SetDrawColor(LCD.Red);
+        LCD.DrawLine(x,y,x+10,y);
+        LCD.DrawLine(x,y+1,x+9,y+1);
+        LCD.DrawLine(x,y+2,x+7,y+2);
+        LCD.DrawLine(x,y+3,x+6,y+3);
+        LCD.DrawLine(x,y+4,x+5,y+4);
+        LCD.DrawLine(x,y+5,x+4,y+5);
+        LCD.DrawPixel(x,y+6);
+
+
+       LCD.SetDrawColor(LCD.Blue);
+       LCD.DrawLine(x,y+10,x+10,y+10);
+       LCD.DrawLine(x+1,y+9,x+10,y+9);
+       LCD.DrawLine(x+5,y+8,x+10,y+8);
+       LCD.DrawLine(x+6,y+7,x+10,y+7);
+       LCD.DrawLine(x+7,y+6,x+10,y+6);
+       LCD.DrawPixel(x+10,y+5);
+
+
+
     }
     else if (charactername == 'C') {
         //chipotle character
-        LCD.SetDrawColor(LCD.Black);
+        LCD.SetDrawColor(LCD.Scarlet);
 
         LCD.FillRectangle(x,y,11,11);
 
-        LCD.SetDrawColor(LCD.Green);
+        LCD.SetDrawColor(LCD.White);
         LCD.DrawLine((x+3),(y+3),(x+3),(y+7));
         LCD.DrawLine((x+5), (y+1), (x+7), (y+1));
         LCD.DrawLine((x+5),(y+9),(x+7),(y+9));
         LCD.DrawPixel((x+4),(y+2));
         LCD.DrawPixel((x+4),(y+8));
+    } else if (charactername == 'P'){
+        //pizza character
+        LCD.SetDrawColor(LCD.White);
+        LCD.FillRectangle(x,y,11,11);
+
+        LCD.SetDrawColor(LCD.Red);
+        LCD.DrawPixel((x+1), (y+5));
+        LCD.DrawPixel((x+9), y+2);
+        LCD.DrawPixel((x+5), (y+5));
+        LCD.DrawPixel((x+8), y+7);
+
     }
 }
 
-int BossFight(int level, HealthBar hb, char charname){
+int BossFight(int level, HealthBar hb, char charname /* user character name*/){
 
     int randint;
     HealthBar bosshp;
-    int xb, yb, t;
-    int xc, yc;
-    int xtempboundary;
 
-    int flag = 0, flag2 - 0;//flag 0 is up, flag 1 is down movement, flag2 = 0 is left, flag2 = 1 is right movement
-
-    int flag3 = 0; //flag3 = 0 is vertical movement, flag3 = 1 is horizontal movement
-
-    xb = 269;
-    yb = 168;
-
-    xtempboundary = 319;
-
-    hb.health = 90;
-    bosshp.health = 200;
+ 
 
     int a,b;
 
     if (level == 1){
+           hb.health = 100;
+    bosshp.health = 100;
+
+    //redraw
         LCD.Clear();
-        LCD.SetDrawColor(LCD.White);
-        LCD.FillRectangle(0,0,319,178);
-
-        LCD.SetDrawColor(LCD.Black);
-        LCD.FillRectangle(0,179,319,50);
-
-        DrawCharacter(charname, 50, 168);
-
-        DrawBoss('M', 269, 168);
+        DrawCharacter(charname,70,80);
         
-        //boss movement is simplified to one move here
+        DrawBoss('M',200,80);
+
+        LCD.SetDrawColor(LCD.Red);
+        LCD.FillRectangle(70,50,20,10);
+
         
-            while ((hb.health > 0) && (bosshp.health > 0)){
-               
-               //character touch-movement detection here
-            while (!LCD.Touch(&a, &b)) {
-             }
 
-             xc = a;//Convert a,b touch on controls to character coordinate increment
-             yc = b;
+        LCD.SetDrawColor(LCD.Red);
+        LCD.FillRectangle(200,50,20,10);
 
-                if (yb >= 168){
-                    flag = 0;
-                    flag3 = 1;
+     
 
-                    if (flag2 == 0){   
-                        xtempboundary -= 90; 
-                    } else if (flag2 == 1){
-                        xtempboundary += 90;
-                    } 
+//moveset for each character
+    if (charname == 'M'){
+        LCD.DrawRectangle(0,100, 100, 50);
+        LCD.WriteAt("Burger Blast", 10, 105);
+
+        LCD.DrawRectangle(110,100,100,50);
+        LCD.WriteAt("McNugget Grenade",120,105);
+
+        LCD.DrawRectangle(0,160,100,50);
+        LCD.WriteAt("Big Mac", 10, 165);
+
+        LCD.DrawRectangle(110,160,100,50);
+        LCD.WriteAt("McFlurry Blizzard", 120, 165);
+
+    } else if (charname == 'P'){
+        LCD.DrawRectangle(0,100, 100, 50);
+        LCD.WriteAt("Pepperoni Razor", 10, 105);
+
+        LCD.DrawRectangle(110,100,100,50);
+        LCD.WriteAt("Cheese Cannon",120,105);
+
+        LCD.DrawRectangle(0,160,100,50);
+        LCD.WriteAt("Pizza Sauce", 10, 165);
+
+        LCD.DrawRectangle(110,160,100,50);
+        LCD.WriteAt("Crust Whip", 120, 165);
+
+    } else if (charname == 'C'){
+        LCD.DrawRectangle(0,100, 100, 50);
+        LCD.WriteAt("Burrito Rocket", 10, 105);
+
+        LCD.DrawRectangle(110,100,100,50);
+        LCD.WriteAt("Taco Blade",120,105);
+
+        LCD.DrawRectangle(0,160,100,50);
+        LCD.WriteAt("Guac Gun", 10, 165);
+
+        LCD.DrawRectangle(110,160,100,50);
+        LCD.WriteAt("Salsa Sword", 120, 165);
+
+    }
+
+
+    while (hb.health > 0 && bosshp.health > 0){
+
+        
+        //character touch-movement detection here
+        while (!LCD.Touch(&a, &b)) {
+
+            //computer randomly moves
+            randint = RandInt() % 4;
+                //damagae values
+
+            if (charname == 'M'){
+                if ((a >= 0 && a <= 100) && (b >= 100 && b <= 150)){
+
+                    bosshp.DamageTaken(15);
+
+                    if (randint == 0){
+                        hb.DamageTaken(15);
+                    }
+
+                } else if ((a >= 0 && a <= 100) && (b >= 160 && b <= 210)){
+
+                    bosshp.DamageTaken(15);
+
+                    if (randint == 1){
+                        hb.DamageTaken(15);
+                    }
+
+                } else if ((a >= 110 && a <= 210) && (b >= 100 && b <= 150){
+
+                    bosshp.DamageTaken(60);
+
+                    if (randint == 2){
+                        hb.DamageTaken(15);
+                    }
+
+                } else if ((a >= 110 && a <= 210) && (b >= 160 && b <= 210){
+
+                    bosshp.DamageTaken(15);
+
+                    if (randint == 3){
+                        hb.DamageTaken(15);
+                    }
+
+                }
+            } else if (charname == 'P'){
+                if ((a >= 0 && a <= 100) && (b >= 100 && b <= 150)){
+
+                    bosshp.DamageTaken(15);
+
+                    if (randint == 0){
+                        hb.DamageTaken(15);
+                    }
+
+                } else if ((a >= 0 && a <= 100) && (b >= 160 && b <= 210)){
+
+                    bosshp.DamageTaken(15);
+
+                    if (randint == 1){
+                        hb.DamageTaken(30);
+                    }
+
+                } else if ((a >= 110 && a <= 210) && (b >= 100 && b <= 150){
+
+                    bosshp.DamageTaken(60);
+
+                    if (randint == 2){
+                        hb.DamageTaken(30);
+                    }
+
+                } else if ((a >= 110 && a <= 210) && (b >= 160 && b <= 210){
+
+                    bosshp.DamageTaken(60);
+
+                    if (randint == 3){
+                        hb.DamageTaken(15);
+                    }
+
+                }
+            } else if (charname == 'C'){
+                if ((a >= 0 && a <= 100) && (b >= 100 && b <= 150)){
+
+                    bosshp.DamageTaken(60);
+
+                    if (randint == 0){
+                        hb.DamageTaken(15);
+                    }
+
+                } else if ((a >= 0 && a <= 100) && (b >= 160 && b <= 210)){
+
+                    bosshp.DamageTaken(60);
+
+                    if (randint == 1){
+                        hb.DamageTaken(30);
+                    }
+
+                } else if ((a >= 110 && a <= 210) && (b >= 100 && b <= 150){
+
+                    bosshp.DamageTaken(15);
+
+                    if (randint == 2){
+                        hb.DamageTaken(30);
+                    }
+
+                } else if ((a >= 110 && a <= 210) && (b >= 160 && b <= 210){
+
+                    bosshp.DamageTaken(15);
+
+                    if (randint == 3){
+                        hb.DamageTaken(15);
+                    }
+
                 }
 
-                if (yb <= 148){
-                    flag = 1;
-                    flag3 = 1;
+            }
+             LCD.Clear();
+             DrawCharacter(charname,70,80);
+        
+            DrawBoss('M',200,80);
 
-                    if (flag2 == 0){   
-                        xtempboundary -= 90; 
-                    } else if (flag2 == 1){
-                        xtempboundary += 90;
-                    } 
-                }
+            LCD.SetDrawColor(LCD.Red);
+            LCD.FillRectangle(70,50,(0.2) * hb.health,10);
 
-                if (((flag2 == 1) && xb >= (xtempboundary)) || ((flag2 == 0) && xb <= (xtempboundary))){
-                    flag3 = 0;
-                }
+        
 
-                if (xb <= 0){
-                    flag2 = 1;
-                }
+            LCD.SetDrawColor(LCD.Red);
+            LCD.FillRectangle(200,50,(0.2) * bosshp.health,10);
 
-                if (xb >= 319){
-                    flag2 = 0;
-                }
-               
-               if (flag3 == 0){
-                   if (flag == 0){
-                       yb += 20;
-                   } else if (flag == 1){
-                       yb -= 20;
-                   }
-               } else if (flag3 == 1){
-                   if (flag2 == 0){
-                       xb -= 30;
-                   } else if (flag2 == 1){
-                       xb += 30;
-                   }
-               }
+     
 
-                if ((abs(xb - xc) <= 11) || (abs(yb-yc) <= 11)){
-                    hb.DamageTaken(30); //30 damage per boss hit level 1? modify as seen fit
-                } 
-                
-                LCD.Clear();
-                LCD.SetDrawColor(LCD.White);
-                LCD.FillRectangle(0,0,319,178);
 
-                LCD.SetDrawColor(LCD.Black);
-                LCD.FillRectangle(0,179,319,50);
+            if (charname == 'M'){
+                LCD.DrawRectangle(0,100, 100, 50);
+                LCD.WriteAt("Burger Blast", 10, 105);
 
-                DrawCharacter(charname, xc, yc);
-                DrawBoss('M', xb, yb);
-                
-               
-            } 
+                 LCD.DrawRectangle(110,100,100,50);
+                 LCD.WriteAt("McNugget Grenade",120,105);
+
+                LCD.DrawRectangle(0,160,100,50);
+                LCD.WriteAt("Big Mac", 10, 165);
+
+                LCD.DrawRectangle(110,160,100,50);
+                LCD.WriteAt("McFlurry Blizzard", 120, 165);
+
+                } else if (charname == 'P'){
+                LCD.DrawRectangle(0,100, 100, 50);
+                LCD.WriteAt("Pepperoni Razor", 10, 105);
+
+                LCD.DrawRectangle(110,100,100,50);
+                LCD.WriteAt("Cheese Cannon",120,105);
+
+                LCD.DrawRectangle(0,160,100,50);
+             LCD.WriteAt("Pizza Sauce", 10, 165);
+
+             LCD.DrawRectangle(110,160,100,50);
+                LCD.WriteAt("Crust Whip", 120, 165);
+
+                } else if (charname == 'C'){
+                LCD.DrawRectangle(0,100, 100, 50);
+                 LCD.WriteAt("Burrito Rocket", 10, 105);
+
+                 LCD.DrawRectangle(110,100,100,50);
+             LCD.WriteAt("Taco Blade",120,105);
+
+                LCD.DrawRectangle(0,160,100,50);
+                LCD.WriteAt("Guac Gun", 10, 165);
+
+                LCD.DrawRectangle(110,160,100,50);
+                LCD.WriteAt("Salsa Sword", 120, 165);
+
+        }
+           
+            
+    }
+
+
+    }         
+
     
+    //level 2 boss fight
+    } else if (level == 2){
+           hb.health = 100;
+    bosshp.health = 200;
+
+         LCD.Clear();
+        DrawCharacter(charname,70,80);
+        
+        DrawBoss('C',200,80);
+
+        LCD.SetDrawColor(LCD.Red);
+        LCD.FillRectangle(70,50,20,10);
+
+        
+
+        LCD.SetDrawColor(LCD.Red);
+        LCD.FillRectangle(200,50,20,10);
+
+     
+
+
+    if (charname == 'M'){
+        LCD.DrawRectangle(0,100, 100, 50);
+        LCD.WriteAt("Burger Blast", 10, 105);
+
+        LCD.DrawRectangle(110,100,100,50);
+        LCD.WriteAt("McNugget Grenade",120,105);
+
+        LCD.DrawRectangle(0,160,100,50);
+        LCD.WriteAt("Big Mac", 10, 165);
+
+        LCD.DrawRectangle(110,160,100,50);
+        LCD.WriteAt("McFlurry Blizzard", 120, 165);
+
+    } else if (charname == 'P'){
+        LCD.DrawRectangle(0,100, 100, 50);
+        LCD.WriteAt("Pepperoni Razor", 10, 105);
+
+        LCD.DrawRectangle(110,100,100,50);
+        LCD.WriteAt("Cheese Cannon",120,105);
+
+        LCD.DrawRectangle(0,160,100,50);
+        LCD.WriteAt("Pizza Sauce", 10, 165);
+
+        LCD.DrawRectangle(110,160,100,50);
+        LCD.WriteAt("Crust Whip", 120, 165);
+
+    } else if (charname == 'C'){
+        LCD.DrawRectangle(0,100, 100, 50);
+        LCD.WriteAt("Burrito Rocket", 10, 105);
+
+        LCD.DrawRectangle(110,100,100,50);
+        LCD.WriteAt("Taco Blade",120,105);
+
+        LCD.DrawRectangle(0,160,100,50);
+        LCD.WriteAt("Guac Gun", 10, 165);
+
+        LCD.DrawRectangle(110,160,100,50);
+        LCD.WriteAt("Salsa Sword", 120, 165);
+
+    }
+
+
+    while (hb.health > 0 && bosshp.health > 0){
+
+        
+        //character touch-movement detection here
+        while (!LCD.Touch(&a, &b)) {
+            randint = RandInt() % 4;
+
+            if (charname == 'M'){
+                if ((a >= 0 && a <= 100) && (b >= 100 && b <= 150)){
+
+                    bosshp.DamageTaken(30);
+
+                    if (randint == 0){
+                        hb.DamageTaken(15);
+                    }
+
+                } else if ((a >= 0 && a <= 100) && (b >= 160 && b <= 210)){
+
+                    bosshp.DamageTaken(60);
+
+                    if (randint == 1){
+                        hb.DamageTaken(40);
+                    }
+
+                } else if ((a >= 110 && a <= 210) && (b >= 100 && b <= 150){
+
+                    bosshp.DamageTaken(60);
+
+                    if (randint == 2){
+                        hb.DamageTaken(30);
+                    }
+
+                } else if ((a >= 110 && a <= 210) && (b >= 160 && b <= 210){
+
+                    bosshp.DamageTaken(15);
+
+                    if (randint == 3){
+                        hb.DamageTaken(15);
+                    }
+
+                }
+            } else if (charname == 'P'){
+                if ((a >= 0 && a <= 100) && (b >= 100 && b <= 150)){
+
+                    bosshp.DamageTaken(15);
+
+                    if (randint == 0){
+                        hb.DamageTaken(15);
+                    }
+
+                } else if ((a >= 0 && a <= 100) && (b >= 160 && b <= 210)){
+
+                    bosshp.DamageTaken(15);
+
+                    if (randint == 1){
+                        hb.DamageTaken(30);
+                    }
+
+                } else if ((a >= 110 && a <= 210) && (b >= 100 && b <= 150){
+
+                    bosshp.DamageTaken(60);
+
+                    if (randint == 2){
+                        hb.DamageTaken(30);
+                    }
+
+                } else if ((a >= 110 && a <= 210) && (b >= 160 && b <= 210){
+
+                    bosshp.DamageTaken(60);
+
+                    if (randint == 3){
+                        hb.DamageTaken(15);
+                    }
+
+                }
+            } else if (charname == 'C'){
+                if ((a >= 0 && a <= 100) && (b >= 100 && b <= 150)){
+
+                    bosshp.DamageTaken(30);
+
+                    if (randint == 0){
+                        hb.DamageTaken(30);
+                    }
+
+                } else if ((a >= 0 && a <= 100) && (b >= 160 && b <= 210)){
+
+                    bosshp.DamageTaken(30);
+
+                    if (randint == 1){
+                        hb.DamageTaken(30);
+                    }
+
+                } else if ((a >= 110 && a <= 210) && (b >= 100 && b <= 150){
+
+                    bosshp.DamageTaken(30);
+
+                    if (randint == 2){
+                        hb.DamageTaken(30);
+                    }
+
+                } else if ((a >= 110 && a <= 210) && (b >= 160 && b <= 210){
+
+                    bosshp.DamageTaken(30);
+
+                    if (randint == 3){
+                        hb.DamageTaken(30);
+                    }
+
+                }
+
+            }
+             LCD.Clear();
+             DrawCharacter(charname,70,80);
+        
+            DrawBoss('C',200,80);
+
+            LCD.SetDrawColor(LCD.Red);
+            LCD.FillRectangle(70,50,(0.2) * hb.health,10);
+
+        
+
+            LCD.SetDrawColor(LCD.Red);
+            LCD.FillRectangle(200,50,(0.2) * bosshp.health,10);
+
+     
+
+
+            if (charname == 'M'){
+                LCD.DrawRectangle(0,100, 100, 50);
+                LCD.WriteAt("Burger Blast", 10, 105);
+
+                 LCD.DrawRectangle(110,100,100,50);
+                 LCD.WriteAt("McNugget Grenade",120,105);
+
+                LCD.DrawRectangle(0,160,100,50);
+                LCD.WriteAt("Big Mac", 10, 165);
+
+                LCD.DrawRectangle(110,160,100,50);
+                LCD.WriteAt("McFlurry Blizzard", 120, 165);
+
+                } else if (charname == 'P'){
+                LCD.DrawRectangle(0,100, 100, 50);
+                LCD.WriteAt("Pepperoni Razor", 10, 105);
+
+                LCD.DrawRectangle(110,100,100,50);
+                LCD.WriteAt("Cheese Cannon",120,105);
+
+                LCD.DrawRectangle(0,160,100,50);
+             LCD.WriteAt("Pizza Sauce", 10, 165);
+
+             LCD.DrawRectangle(110,160,100,50);
+                LCD.WriteAt("Crust Whip", 120, 165);
+
+                } else if (charname == 'C'){
+                LCD.DrawRectangle(0,100, 100, 50);
+                 LCD.WriteAt("Burrito Rocket", 10, 105);
+
+                 LCD.DrawRectangle(110,100,100,50);
+             LCD.WriteAt("Taco Blade",120,105);
+
+                LCD.DrawRectangle(0,160,100,50);
+                LCD.WriteAt("Guac Gun", 10, 165);
+
+                LCD.DrawRectangle(110,160,100,50);
+                LCD.WriteAt("Salsa Sword", 120, 165);
+
+        }
+           
+            
+    }
+
+
+    }         
+    //level 3 boss fight
+    } else if (level == 3){
+
+           hb.health = 100;
+    bosshp.health = 300;
+
+                 LCD.Clear();
+        DrawCharacter(charname,70,80);
+        
+        DrawBoss('P',200,80);
+
+        LCD.SetDrawColor(LCD.Red);
+        LCD.FillRectangle(70,50,20,10);
+
+        
+
+        LCD.SetDrawColor(LCD.Red);
+        LCD.FillRectangle(200,50,20,10);
+
+     
+
+
+    if (charname == 'M'){
+        LCD.DrawRectangle(0,100, 100, 50);
+        LCD.WriteAt("Burger Blast", 10, 105);
+
+        LCD.DrawRectangle(110,100,100,50);
+        LCD.WriteAt("McNugget Grenade",120,105);
+
+        LCD.DrawRectangle(0,160,100,50);
+        LCD.WriteAt("Big Mac", 10, 165);
+
+        LCD.DrawRectangle(110,160,100,50);
+        LCD.WriteAt("McFlurry Blizzard", 120, 165);
+
+    } else if (charname == 'P'){
+        LCD.DrawRectangle(0,100, 100, 50);
+        LCD.WriteAt("Pepperoni Razor", 10, 105);
+
+        LCD.DrawRectangle(110,100,100,50);
+        LCD.WriteAt("Cheese Cannon",120,105);
+
+        LCD.DrawRectangle(0,160,100,50);
+        LCD.WriteAt("Pizza Sauce", 10, 165);
+
+        LCD.DrawRectangle(110,160,100,50);
+        LCD.WriteAt("Crust Whip", 120, 165);
+
+    } else if (charname == 'C'){
+        LCD.DrawRectangle(0,100, 100, 50);
+        LCD.WriteAt("Burrito Rocket", 10, 105);
+
+        LCD.DrawRectangle(110,100,100,50);
+        LCD.WriteAt("Taco Blade",120,105);
+
+        LCD.DrawRectangle(0,160,100,50);
+        LCD.WriteAt("Guac Gun", 10, 165);
+
+        LCD.DrawRectangle(110,160,100,50);
+        LCD.WriteAt("Salsa Sword", 120, 165);
+
+    }
+
+
+    while (hb.health > 0 && bosshp.health > 0){
+
+        
+        //character touch-movement detection here
+        while (!LCD.Touch(&a, &b)) {
+            randint = RandInt() % 4;
+
+            if (charname == 'M'){
+                if ((a >= 0 && a <= 100) && (b >= 100 && b <= 150)){
+
+                    bosshp.DamageTaken(30);
+
+                    if (randint == 0){
+                        hb.DamageTaken(15);
+                    }
+
+                } else if ((a >= 0 && a <= 100) && (b >= 160 && b <= 210)){
+
+                    bosshp.DamageTaken(60);
+
+                    if (randint == 1){
+                        hb.DamageTaken(40);
+                    }
+
+                } else if ((a >= 110 && a <= 210) && (b >= 100 && b <= 150){
+
+                    bosshp.DamageTaken(60);
+
+                    if (randint == 2){
+                        hb.DamageTaken(30);
+                    }
+
+                } else if ((a >= 110 && a <= 210) && (b >= 160 && b <= 210){
+
+                    bosshp.DamageTaken(15);
+
+                    if (randint == 3){
+                        hb.DamageTaken(15);
+                    }
+
+                }
+            } else if (charname == 'P'){
+                if ((a >= 0 && a <= 100) && (b >= 100 && b <= 150)){
+
+                    bosshp.DamageTaken(15);
+
+                    if (randint == 0){
+                        hb.DamageTaken(15);
+                    }
+
+                } else if ((a >= 0 && a <= 100) && (b >= 160 && b <= 210)){
+
+                    bosshp.DamageTaken(15);
+
+                    if (randint == 1){
+                        hb.DamageTaken(30);
+                    }
+
+                } else if ((a >= 110 && a <= 210) && (b >= 100 && b <= 150){
+
+                    bosshp.DamageTaken(60);
+
+                    if (randint == 2){
+                        hb.DamageTaken(30);
+                    }
+
+                } else if ((a >= 110 && a <= 210) && (b >= 160 && b <= 210){
+
+                    bosshp.DamageTaken(60);
+
+                    if (randint == 3){
+                        hb.DamageTaken(15);
+                    }
+
+                }
+            } else if (charname == 'C'){
+                if ((a >= 0 && a <= 100) && (b >= 100 && b <= 150)){
+
+                    bosshp.DamageTaken(20);
+
+                    if (randint == 0){
+                        hb.DamageTaken(30);
+                    }
+
+                } else if ((a >= 0 && a <= 100) && (b >= 160 && b <= 210)){
+
+                    bosshp.DamageTaken(60);
+
+                    if (randint == 1){
+                        hb.DamageTaken(40);
+                    }
+
+                } else if ((a >= 110 && a <= 210) && (b >= 100 && b <= 150){
+
+                    bosshp.DamageTaken(40);
+
+                    if (randint == 2){
+                        hb.DamageTaken(30);
+                    }
+
+                } else if ((a >= 110 && a <= 210) && (b >= 160 && b <= 210){
+
+                    bosshp.DamageTaken(30);
+
+                    if (randint == 3){
+                        hb.DamageTaken(60);
+                    }
+
+                }
+
+            }
+             LCD.Clear();
+             DrawCharacter(charname,70,80);
+        
+            DrawBoss('P',200,80);
+
+            LCD.SetDrawColor(LCD.Red);
+            LCD.FillRectangle(70,50,(0.2) * hb.health,10);
+
+        
+
+            LCD.SetDrawColor(LCD.Red);
+            LCD.FillRectangle(200,50,(0.2) * bosshp.health,10);
+
+     
+
+
+            if (charname == 'M'){
+                LCD.DrawRectangle(0,100, 100, 50);
+                LCD.WriteAt("Burger Blast", 10, 105);
+
+                 LCD.DrawRectangle(110,100,100,50);
+                 LCD.WriteAt("McNugget Grenade",120,105);
+
+                LCD.DrawRectangle(0,160,100,50);
+                LCD.WriteAt("Big Mac", 10, 165);
+
+                LCD.DrawRectangle(110,160,100,50);
+                LCD.WriteAt("McFlurry Blizzard", 120, 165);
+
+                } else if (charname == 'P'){
+                LCD.DrawRectangle(0,100, 100, 50);
+                LCD.WriteAt("Pepperoni Razor", 10, 105);
+
+                LCD.DrawRectangle(110,100,100,50);
+                LCD.WriteAt("Cheese Cannon",120,105);
+
+                LCD.DrawRectangle(0,160,100,50);
+             LCD.WriteAt("Pizza Sauce", 10, 165);
+
+             LCD.DrawRectangle(110,160,100,50);
+                LCD.WriteAt("Crust Whip", 120, 165);
+
+                } else if (charname == 'C'){
+                LCD.DrawRectangle(0,100, 100, 50);
+                 LCD.WriteAt("Burrito Rocket", 10, 105);
+
+                 LCD.DrawRectangle(110,100,100,50);
+             LCD.WriteAt("Taco Blade",120,105);
+
+                LCD.DrawRectangle(0,160,100,50);
+                LCD.WriteAt("Guac Gun", 10, 165);
+
+                LCD.DrawRectangle(110,160,100,50);
+                LCD.WriteAt("Salsa Sword", 120, 165);
+
+        }
+           
+            
+    }
+
 
     } 
+    //Pepsi final boss fight
+    } else if (level == 4){
+         hb.health = 100;
+    bosshp.health = 300;
+
+        LCD.Clear();
+        DrawCharacter(charname,70,80);
+        
+        DrawBoss('Pe',200,80);
+
+        LCD.SetDrawColor(LCD.Red);
+        LCD.FillRectangle(70,50,20,10);
+
+        
+
+        LCD.SetDrawColor(LCD.Red);
+        LCD.FillRectangle(200,50,20,10);
+
+     
+
+
+    if (charname == 'M'){
+        LCD.DrawRectangle(0,100, 100, 50);
+        LCD.WriteAt("Burger Blast", 10, 105);
+
+        LCD.DrawRectangle(110,100,100,50);
+        LCD.WriteAt("McNugget Grenade",120,105);
+
+        LCD.DrawRectangle(0,160,100,50);
+        LCD.WriteAt("Big Mac", 10, 165);
+
+        LCD.DrawRectangle(110,160,100,50);
+        LCD.WriteAt("McFlurry Blizzard", 120, 165);
+
+    } else if (charname == 'P'){
+        LCD.DrawRectangle(0,100, 100, 50);
+        LCD.WriteAt("Pepperoni Razor", 10, 105);
+
+        LCD.DrawRectangle(110,100,100,50);
+        LCD.WriteAt("Cheese Cannon",120,105);
+
+        LCD.DrawRectangle(0,160,100,50);
+        LCD.WriteAt("Pizza Sauce", 10, 165);
+
+        LCD.DrawRectangle(110,160,100,50);
+        LCD.WriteAt("Crust Whip", 120, 165);
+
+    } else if (charname == 'C'){
+        LCD.DrawRectangle(0,100, 100, 50);
+        LCD.WriteAt("Burrito Rocket", 10, 105);
+
+        LCD.DrawRectangle(110,100,100,50);
+        LCD.WriteAt("Taco Blade",120,105);
+
+        LCD.DrawRectangle(0,160,100,50);
+        LCD.WriteAt("Guac Gun", 10, 165);
+
+        LCD.DrawRectangle(110,160,100,50);
+        LCD.WriteAt("Salsa Sword", 120, 165);
+
+    }
+
+
+    while (hb.health > 0 && bosshp.health > 0){
+
+        
+        //character touch-movement detection here
+        while (!LCD.Touch(&a, &b)) {
+            randint = RandInt() % 4;
+
+            if (charname == 'M'){
+                if ((a >= 0 && a <= 100) && (b >= 100 && b <= 150)){
+
+                    bosshp.DamageTaken(50);
+
+                    if (randint == 0){
+                        hb.DamageTaken(20);
+                    }
+
+                } else if ((a >= 0 && a <= 100) && (b >= 160 && b <= 210)){
+
+                    bosshp.DamageTaken(50);
+
+                    if (randint == 1){
+                        hb.DamageTaken(20);
+                    }
+
+                } else if ((a >= 110 && a <= 210) && (b >= 100 && b <= 150){
+
+                    bosshp.DamageTaken(50);
+
+                    if (randint == 2){
+                        hb.DamageTaken(20);
+                    }
+
+                } else if ((a >= 110 && a <= 210) && (b >= 160 && b <= 210){
+
+                    bosshp.DamageTaken(50);
+
+                    if (randint == 3){
+                        hb.DamageTaken(20);
+                    }
+
+                }
+            } else if (charname == 'P'){
+                if ((a >= 0 && a <= 100) && (b >= 100 && b <= 150)){
+
+                    bosshp.DamageTaken(50);
+
+                    if (randint == 0){
+                        hb.DamageTaken(20);
+                    }
+
+                } else if ((a >= 0 && a <= 100) && (b >= 160 && b <= 210)){
+
+                    bosshp.DamageTaken(50);
+
+                    if (randint == 1){
+                        hb.DamageTaken(20);
+                    }
+
+                } else if ((a >= 110 && a <= 210) && (b >= 100 && b <= 150){
+
+                    bosshp.DamageTaken(50);
+
+                    if (randint == 2){
+                        hb.DamageTaken(20);
+                    }
+
+                } else if ((a >= 110 && a <= 210) && (b >= 160 && b <= 210){
+
+                    bosshp.DamageTaken(50);
+
+                    if (randint == 3){
+                        hb.DamageTaken(20);
+                    }
+
+                }
+            } else if (charname == 'C'){
+                if ((a >= 0 && a <= 100) && (b >= 100 && b <= 150)){
+
+                    bosshp.DamageTaken(50);
+
+                    if (randint == 0){
+                        hb.DamageTaken(20);
+                    }
+
+                } else if ((a >= 0 && a <= 100) && (b >= 160 && b <= 210)){
+
+                    bosshp.DamageTaken(50);
+
+                    if (randint == 1){
+                        hb.DamageTaken(20);
+                    }
+
+                } else if ((a >= 110 && a <= 210) && (b >= 100 && b <= 150){
+
+                    bosshp.DamageTaken(50);
+
+                    if (randint == 2){
+                        hb.DamageTaken(20);
+                    }
+
+                } else if ((a >= 110 && a <= 210) && (b >= 160 && b <= 210){
+
+                    bosshp.DamageTaken(50);
+
+                    if (randint == 3){
+                        hb.DamageTaken(20);
+                    }
+
+                }
+
+            }
+             LCD.Clear();
+             DrawCharacter(charname,70,80);
+        
+            DrawBoss('Pe',200,80);
+
+            LCD.SetDrawColor(LCD.Red);
+            LCD.FillRectangle(70,50,(0.2) * hb.health,10);
+
+        
+
+            LCD.SetDrawColor(LCD.Red);
+            LCD.FillRectangle(200,50,(0.2) * bosshp.health,10);
+
+     
+
+
+            if (charname == 'M'){
+                LCD.DrawRectangle(0,100, 100, 50);
+                LCD.WriteAt("Burger Blast", 10, 105);
+
+                 LCD.DrawRectangle(110,100,100,50);
+                 LCD.WriteAt("McNugget Grenade",120,105);
+
+                LCD.DrawRectangle(0,160,100,50);
+                LCD.WriteAt("Big Mac", 10, 165);
+
+                LCD.DrawRectangle(110,160,100,50);
+                LCD.WriteAt("McFlurry Blizzard", 120, 165);
+
+                } else if (charname == 'P'){
+                LCD.DrawRectangle(0,100, 100, 50);
+                LCD.WriteAt("Pepperoni Razor", 10, 105);
+
+                LCD.DrawRectangle(110,100,100,50);
+                LCD.WriteAt("Cheese Cannon",120,105);
+
+                LCD.DrawRectangle(0,160,100,50);
+             LCD.WriteAt("Pizza Sauce", 10, 165);
+
+             LCD.DrawRectangle(110,160,100,50);
+                LCD.WriteAt("Crust Whip", 120, 165);
+
+                } else if (charname == 'C'){
+                LCD.DrawRectangle(0,100, 100, 50);
+                 LCD.WriteAt("Burrito Rocket", 10, 105);
+
+                 LCD.DrawRectangle(110,100,100,50);
+             LCD.WriteAt("Taco Blade",120,105);
+
+                LCD.DrawRectangle(0,160,100,50);
+                LCD.WriteAt("Guac Gun", 10, 165);
+
+                LCD.DrawRectangle(110,160,100,50);
+                LCD.WriteAt("Salsa Sword", 120, 165);
+
+        }
+           
+            
+    }
+
+
+    }         
+
+    }
 
     if (bosshp.health <= 0){
         return 1;
