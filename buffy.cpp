@@ -200,10 +200,11 @@ void DisplayInstructions() {
     //clearing the screen
     LCD.Clear();
 
-    LCD.WriteAt("1: Use keys to move around", 0,0);
-    LCD.WriteAt("2: Battle bosses to advance levels", 0 ,30);
-    LCD.WriteAt("3: Don't let your HP go to zero!", 0, 60);
-    LCD.WriteAt("4: HAVE FUN!", 0,90);
+    LCD.WriteAt("1: Click on the edges of the screen to move in that direction", 0,0);
+    LCD.WriteAt("2: Move towards the exit in order to fight the boss", 0 ,30);
+    LCD.WriteAt("3: Each boss has a weakness!", 0, 60);
+    LCD.WriteAt("4: Pick up a health potion by walking over the red circle on each level.", 0,90);
+    LCD.WriteAt("5: HAVE FUN!", 0,120);
 
     //drawing a back button for the player to go back to the menu
     LCD.DrawRectangle(0,(Y_MAX-20),50,20);
