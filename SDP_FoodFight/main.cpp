@@ -168,19 +168,19 @@ void PlayGame(Stats st) {
     //running the levels
     level=RunLevel(level,character,uh);
     if(level!=0){
-        st.battle++;
+        st.IncreaseBattle();
     }//end if statment
     level=RunLevel(level,character,uh);
     if(level!=0){
-        st.battle++;
+        st.IncreaseBattle();
     }//end if statment
     level=RunLevel(level,character,uh);
     if(level!=0){
-        st.battle++;
+        st.IncreaseBattle();
     }//end if statment
     level=RunLevel(level,character,uh);
     if(level!=0){
-        st.battle++;
+        st.IncreaseBattle();
     }//end if statment
 
     //win lose
@@ -190,7 +190,7 @@ void PlayGame(Stats st) {
     }
     if(level==0){
         LCD.WriteLine("You Lose");
-        st.death++;
+        st.IncreaseDeath();
         std::this_thread::sleep_for(std::chrono::milliseconds(5000));
     }
 }
