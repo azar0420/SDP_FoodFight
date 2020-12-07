@@ -14,6 +14,7 @@ void PlayGame();
 void DrawLevel(int);
 void Intro();
 void DrawCharacter(char, int, int);
+void PepsiBackstory();
 
 class Stats {
     private:
@@ -279,17 +280,16 @@ void DrawLevel(int level) {
 
             //drawing wall outlines
             LCD.SetDrawColor(LCD.Blue);
-            LCD.DrawLine(120,0,15,Y_MAX);
             LCD.DrawLine(X_MAX,0,297,50);
-            LCD.DrawLine(100,50,297,50);
+            LCD.FillRectangle(0,50,297,Y_MAX-50);
             LCD.DrawLine(297,50,297,Y_MAX);
 
-            //drawing logo onto first wall
             LCD.SetDrawColor(LCD.Red);
-            LCD.DrawLine(34,74,28,98);
-            LCD.DrawLine(34,74,50,0);
-            LCD.DrawLine(28,98,0,150);
-            LCD.FillRectangle(0,0,28,98);
+            LCD.FillRectangle(0,0,297,49);
+            
+            for (int i = 0; i < 50; i++) {
+                LCD.DrawHorizontalLine(i,297,(X_MAX-0.5*i));
+            }
 
             //drawing entrance
             LCD.SetDrawColor(LCD.White);
@@ -297,6 +297,16 @@ void DrawLevel(int level) {
                 LCD.DrawLine(309,y,X_MAX,(y-14));
             }
 
+            LCD.FillCircle(150,150,50);
+
+            //writing the letter P on the floor
+            LCD.SetDrawColor(LCD.Scarlet);
+            LCD.DrawVerticalLine(130,110,190);
+            LCD.DrawHorizontalLine(111,130,160);
+            LCD.DrawHorizontalLine(150,130,160);
+            LCD.DrawVerticalLine(170,130,135);
+            LCD.DrawLine(160,111,170,130);
+            LCD.DrawLine(170,135,160,150);
 
             break;
         case 3:
@@ -460,56 +470,191 @@ void DrawLevel(int level) {
             break;
     }
 }
-void DrawCharacter(char characterselect, int x, int y) {
-    if (characterselect == 'M') {
-        LCD.SetDrawColor(LCD.Blue);
-        LCD.DrawRectangle(x,y,11,11);
 
-        LCD.SetDrawColor(LCD.Red);
+//gray represents user while blue represents pepsiman
+void PepsiBackstory() {
+    int x, y;
+    LCD.SetFontColor(LCD.White);
 
-        for (int i = x+1; i < x+10; i++){
-            if (i == (x+1)|| i == (x+9)) {
-                LCD.DrawLine(i,(y+10),i,(y+5));
-                continue;
-            }
+    LCD.SetDrawColor(LCD.Gray); 
+    LCD.FillRectangle(0,0,X_MAX,30);
 
-            if (i == (x+3)|| i == (x+7)) {
-                LCD.DrawLine(i,(y+1),i,(y+5));
-                continue;
-            }
-            if (i == (x+5)) {
-                LCD.DrawLine(i,(y+4), i, (y+9));
-            }
-            else {
-                LCD.DrawLine(i,(y+2),i,(y+7));
-                continue;
-            }
-        }
-
-
+    LCD.WriteAt("!!!", 100,10);
+    
+    while(!LCD.Touch(&x, &y)) {
+        //runs until touched
     }
-    else if (characterselect == 'P') {
-        //Pizza character
-        LCD.SetDrawColor(LCD.White);
-        LCD.FillRectangle(x,y,11,11);
 
-        LCD.SetDrawColor(LCD.Red);
-        LCD.DrawPixel((x+1), (y+5));
-        LCD.DrawPixel((x+9), y+2);
-        LCD.DrawPixel((x+5), (y+5));
-        LCD.DrawPixel((x+8), y+7);
+    LCD.FillRectangle(0,0,X_MAX,30);
+    LCD.WriteAt("Pepsiman, what are you doing here?!", 20,10);
+
+    while(!LCD.Touch(&x, &y)) {
+        //runs until touched
     }
-    else if (characterselect == 'C') {
-        //chipotle character
-        LCD.SetDrawColor(LCD.Scarlet);
 
-        LCD.FillRectangle(x,y,11,11);
+    LCD.SetDrawColor(LCD.Blue);
+    LCD.FillRectangle(0,0,X_MAX,30);
+    LCD.WriteAt("So the time has come hasn't it?", 20,10);
 
-        LCD.SetDrawColor(LCD.White);
-        LCD.DrawLine((x+3),(y+3),(x+3),(y+7));
-        LCD.DrawLine((x+5), (y+1), (x+7), (y+1));
-        LCD.DrawLine((x+5),(y+9),(x+7),(y+9));
-        LCD.DrawPixel((x+4),(y+2));
-        LCD.DrawPixel((x+4),(y+8));
+    while(!LCD.Touch(&x, &y)) {
+        //runs until touched
+    }
+    LCD.SetDrawColor(LCD.Gray);
+    LCD.FillRectangle(0,0,X_MAX,30);
+    LCD.WriteAt("For us to defeat a monster together?", 10, 10);
+
+    while(!LCD.Touch(&x,&y)) {
+        //runs until touched
+    }
+
+    LCD.SetDrawColor(LCD.Blue);
+    LCD.FillRectangle(0,0,X_MAX,30);
+    LCD.WriteAt("Gosh, you're such a nincompoop", 20,10);
+
+    while(!LCD.Touch(&x,&y)) {
+        //runs until touched
+    }
+    LCD.FillRectangle(0,0,X_MAX,30);
+    LCD.WriteAt("Where do you think these creatures",0,0);
+    LCD.WriteAt("come from?", 100,15);
+
+    while(!LCD.Touch(&x,&y)) {
+        //runs until touched
+    }
+
+    LCD.SetDrawColor(LCD.Gray);
+    LCD.FillRectangle(0,0,X_MAX,30);
+    LCD.WriteAt("umm----", 150,0);
+
+    while(!LCD.Touch(&x,&y)) {
+        //runs until touched
+    }
+
+    LCD.FillRectangle(0,0,X_MAX,30);
+
+    while(!LCD.Touch(&x,&y)) {
+        //runs until touched
+    }
+
+    LCD.WriteAt("YOU?!", 150,10);
+
+    while(!LCD.Touch(&x,&y)) {
+        //runs until touched
+    }
+
+    LCD.SetDrawColor(LCD.Blue);
+    LCD.FillRectangle(0,0,X_MAX,30);
+    LCD.WriteAt("Well nice work Sherlock", 20,10);
+
+    while(!LCD.Touch(&x,&y)) {
+        //runs until touched
+    }
+    LCD.SetDrawColor(LCD.Gray);
+    LCD.FillRectangle(0,0,X_MAX,30);
+    LCD.WriteAt("How could you? And why?", 20,10);
+
+    while(!LCD.Touch(&x,&y)) {
+        //runs until touched
+    }
+
+    LCD.SetDrawColor(LCD.Blue);
+    LCD.FillRectangle(0,0,X_MAX,30);
+    LCD.WriteAt("It all started years ago", 20,10);
+
+    while(!LCD.Touch(&x,&y)) {
+        //runs until touched
+    }
+
+    LCD.FillRectangle(0,0,X_MAX,30);
+    LCD.WriteAt("All the restaurants lived in harmony", 0,10);
+
+    while(!LCD.Touch(&x,&y)) {
+        //runs until touched
+    }
+
+    LCD.FillRectangle(0,0,X_MAX,30);
+    LCD.WriteAt("And I lived in peace with them", 0,10);
+
+    while(!LCD.Touch(&x,&y)) {
+        //runs until touched
+    }
+
+    LCD.FillRectangle(0,0,X_MAX,30);
+    LCD.WriteAt("Until every single restaurant switched to ", 0, 10);
+
+    while(!LCD.Touch(&x,&y)) {
+        //runs until touched
+    }
+
+    LCD.FillRectangle(0,0,X_MAX,30);
+    LCD.WriteAt("COKE", 150,10);
+
+    while(!LCD.Touch(&x,&y)) {
+        //runs until touched
+    }
+
+    LCD.FillRectangle(0,0,X_MAX,30);
+    LCD.WriteAt("while forgetting about me", 10,10);
+
+    while(!LCD.Touch(&x,&y)) {
+        //runs until touched
+    }
+
+    LCD.FillRectangle(0,0,X_MAX,30);
+    LCD.WriteAt("I made these monsters", 10,10);
+
+    while(!LCD.Touch(&x,&y)) {
+        //runs until touched
+    }
+
+    LCD.FillRectangle(0,0,X_MAX,30);
+    LCD.WriteAt("so that I could save restaurants", 0,10);
+
+    while(!LCD.Touch(&x,&y)) {
+        //runs until touched
+    }
+
+    LCD.FillRectangle(0,0,X_MAX,30);
+    LCD.WriteAt("and become more than a drink again", 0,10);
+
+    while(!LCD.Touch(&x,&y)) {
+        //runs until touched
+    }
+
+    LCD.SetDrawColor(LCD.Gray);
+    LCD.FillRectangle(0,0,X_MAX,30);
+    LCD.WriteAt("But why ask me to help you?", 10,10);
+
+    while(!LCD.Touch(&x,&y)) {
+        //runs until touched
+    }
+
+    LCD.SetDrawColor(LCD.Blue);
+    LCD.FillRectangle(0,0,X_MAX,30);
+    LCD.WriteAt("I underestimated your strength", 0,10);
+       
+    while(!LCD.Touch(&x,&y)) {
+        //runs until touched
+    }
+
+    LCD.FillRectangle(0,0,X_MAX,30);
+    LCD.WriteAt("I didn't think you'd defeat all of them",0,0);
+
+    while(!LCD.Touch(&x,&y)) {
+        //runs until touched
+    }
+
+    LCD.FillRectangle(0,0,X_MAX,30);
+    LCD.WriteAt("But now that you know my secret", 10,10);
+        
+    while(!LCD.Touch(&x,&y)) {
+        //runs until touched
+    }
+    
+    LCD.FillRectangle(0,0,X_MAX,30);
+    LCD.WriteAt("It looks like I'll have to kill you myself",0,10);
+
+    while(!LCD.Touch(&x,&y)) {
+        //runs until touched
     }
 }
