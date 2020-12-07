@@ -268,7 +268,7 @@ int RunLevel(int a, char m, HealthBar userhealth){
         
         //various int definition
         int level=a;
-        int button=1;
+        int button=0;
         int userinput;
         int userinputx,userinputy;
         int hatchlocx,hatchlocy;
@@ -317,6 +317,7 @@ if(level!=0){
         DrawLevel(level);
         DrawCharacter(character,characterlocx,characterlocy);
         if (button!=1){
+            LCD.SetDrawColor(LCD.Red);
             LCD.DrawCircle(buttonarray[0],buttonarray[1],5);
         }//draw button
         while (!LCD.Touch(&userinputx, &userinputy)) {
