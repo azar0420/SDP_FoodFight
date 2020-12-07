@@ -680,7 +680,7 @@ int BossFight(int level, HealthBar hb, char charname /* user character name*/){
         
         //character touch-movement detection here
         while (!LCD.Touch(&a, &b)) {
-
+        }
             //computer randomly moves
             randint = RandInt() % 4;
                 //damage values
@@ -1035,10 +1035,10 @@ int BossFight(int level, HealthBar hb, char charname /* user character name*/){
             //LCD.WriteAt(bossmove,230,140);*/
             
             
-    }
+    //}//end of while not touch
 
 
-    }         
+    }//end of level 1 movement       
 
     
     //level 2 boss fight
@@ -1122,6 +1122,7 @@ int BossFight(int level, HealthBar hb, char charname /* user character name*/){
         
         //character touch-movement detection here
         while (!LCD.Touch(&a, &b)) {
+        }//end while not touch
             randint = RandInt() % 4;
 
             if (charname == 'M'){
@@ -1488,7 +1489,7 @@ int BossFight(int level, HealthBar hb, char charname /* user character name*/){
             LCD.WriteAt("Boss move:",230,120);
             LCD.WriteAt(bossmove,230,140);*/
             
-    }
+    //}//end of while not touch
 
 
     }         
@@ -1574,6 +1575,7 @@ int BossFight(int level, HealthBar hb, char charname /* user character name*/){
         
         //character touch-movement detection here
         while (!LCD.Touch(&a, &b)) {
+        }
             randint = RandInt() % 4;
 
             if (charname == 'M'){
@@ -1942,7 +1944,7 @@ int BossFight(int level, HealthBar hb, char charname /* user character name*/){
             LCD.WriteAt(bossmove,230,140);*/
            
             
-    }
+    //}//end of while not touch v1
 
 
     } 
@@ -2027,6 +2029,7 @@ int BossFight(int level, HealthBar hb, char charname /* user character name*/){
         
         //character touch-movement detection here
         while (!LCD.Touch(&a, &b)) {
+        }//end of while not touch
             randint = RandInt() % 4;
 
             if (charname == 'M'){
@@ -2336,7 +2339,7 @@ int BossFight(int level, HealthBar hb, char charname /* user character name*/){
 
             LCD.SetDrawColor(LCD.Red);
             LCD.FillRectangle(200,50,(0.2) * bosshp.health,10);
-        }
+        //}//end of while not touch
      
 
 
@@ -2375,9 +2378,8 @@ int BossFight(int level, HealthBar hb, char charname /* user character name*/){
         LCD.WriteAt("Whip", 130, 165);
 
      }
-    }
-
-    } else if (charname == 'C'){
+    
+    else if (charname == 'C'){
         LCD.DrawRectangle(0,100, 100, 50);
         LCD.WriteAt("Burrito", 10, 105);
         LCD.WriteAt("Rocket", 20, 105);
@@ -2407,12 +2409,16 @@ int BossFight(int level, HealthBar hb, char charname /* user character name*/){
     } else if (hb.health <= 0){
         return 0;
     }
+    }//end of while loop
+    }//end of level 4
 
-    
-
-}
+}//end of the boss function
 
 
+
+
+
+//INTRO C4
 
 
 
